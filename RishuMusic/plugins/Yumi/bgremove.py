@@ -17,7 +17,7 @@ def check_filename(filroid):
     return filroid
 
 async def RemoveBG(input_file_name):
-    headers = {"X-API-Key": "P6oDw1YNnMdkoMXxmWJinHQK"}
+    headers = {"X-API-Key": "Gs5YzKbUQkq3fxj3oGzaTt4j"}
     files = {"image_file": open(input_file_name, "rb").read()}
     async with aiohttp.ClientSession() as ses:
         async with ses.post(
