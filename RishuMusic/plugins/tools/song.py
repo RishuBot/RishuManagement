@@ -347,17 +347,18 @@ async def download_instareels(c: app, m: Message):
 async def instagram_reel(client, message):
     if len(message.command) == 2:
         url = message.command[1]
-        response = requests.post(f"https://lexica-api.vercel.app/download/instagram?url={url}")
+        response = requests.get(f"https://socialdownloder.anshapi.workers.dev/api/instagram?url={url}")
         data = response.json()
 
-        if data['code'] == 2:
-            media_urls = data['content']['mediaUrls']
-            if media_urls:
-                video_url = media_urls[0]['url']
-                await message.reply_video(f"{video_url}")
+        if data.get('error') == False:
+            videos = data.get('videos', [])
+            if videos:
+                # Get the first video URL (usually the highest quality)
+                video_url = videos[0]['url']
+                await message.reply_video(f"[video url] ({video_url})")
             else:
-                await message.reply("No video found in the response. may be accountbis private.")
+                await message.reply("No video found in the response. The account might be private or the URL is invalid.")
         else:
             await message.reply("Request was not successful.")
     else:
-        await message.reply("Please provide a valid Instagram URL using the /reels command.")
+        await message.reply("Please provide a valid Instagram URL using the /reel command.")
