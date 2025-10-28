@@ -355,7 +355,7 @@ async def instagram_reel(client, message):
             if videos:
                 # Get the first video URL (usually the highest quality)
                 video_url = videos[0]['url']
-                await message.reply_video(f"[video url] ({video_url})")
+                await message.reply_video(f" {video_url}")
             else:
                 await message.reply("No video found in the response. The account might be private or the URL is invalid.")
         else:
