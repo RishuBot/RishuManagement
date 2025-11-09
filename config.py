@@ -10,7 +10,7 @@ API_HASH = getenv("API_HASH")
 
 BOT_TOKEN = getenv("BOT_TOKEN")
 OWNER_USERNAME = getenv("OWNER_USERNAME","Rishu1286")
-BOT_USERNAME = getenv("BOT_USERNAME" , "Vip_music_vc_bot")
+BOT_USERNAME = getenv("BOT_USERNAME" , "")
 BOT_NAME = getenv("BOT_NAME" , "RISHU")
 ASSUSERNAME = getenv("ASSUSERNAME" , "Rishu_music")
 MONGO_DB_URI = getenv("MONGO_DB_URI", None)
