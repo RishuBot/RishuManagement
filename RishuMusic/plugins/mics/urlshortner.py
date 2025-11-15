@@ -82,7 +82,7 @@ async def unshort(bot, message):
 # app.add_handler(MessageHandler(unshort))
 __help__ = """
 ᴍᴀᴋᴇ sʜᴏʀᴛs ᴏғ ᴀ ɢɪᴠᴇɴ ʟɪɴᴋ 
- ❍ /short <url>  *:Example `/short https://t.me/all_sanatani_bot`.
+ ❍ /short <url>  *:Example `/short https://t.me/ur_rishu_143`.
  *"""
 
 __mod_name__ = "Sʜᴏʀᴛᴇɴᴇʀ"
