@@ -9,6 +9,7 @@ from RishuMusic.mongo.afkdb import add_afk, is_afk, remove_afk
 import random 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+
 NEXIO = [
         [
             InlineKeyboardButton(text="• ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ •", url=f"https://t.me/DikshaChatBot?startgroup=true"),
